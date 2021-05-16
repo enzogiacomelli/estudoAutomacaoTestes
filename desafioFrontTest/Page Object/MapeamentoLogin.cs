@@ -1,12 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using OpenQA.Selenium.Support.PageObjects;
+using System.Text.RegularExpressions;
+using System.Threading;
+using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using System.Threading.Tasks;
-using System.Linq;
+using OpenQA.Selenium.Support.PageObjects;
+using System.Configuration;
+using desafioFrontTest.Page_Object;
+using OpenQA.Selenium.Remote;
+
+
+
 
 
 
@@ -14,13 +20,21 @@ namespace desafioFrontTest.Page_Object
 {
     public class MapeamentoLogin
     {
-        [FindsBy(How = How.Name, Using = "user-name")]
-        public IWebElement username { get; set; }
+        private RemoteWebDriver _driver;
 
-        [FindsBy(How = How.Name, Using = "password")]
-        public IWebElement password { get; set; }
+        public MapeamentoLogin(RemoteWebDriver driver) => _driver = driver;
 
-        [FindsBy(How = How.Name, Using = "login-button")]
-        public IWebElement loginBtn { get; set; }
+
+        public IWebElement username => _driver.FindElement(By.Name("user-name"));
+        public IWebElement password => _driver.FindElement(By.Name("password"));
+        public IWebElement loginBtn => _driver.FindElement(By.Name("login-button"));
+        public IWebElement alertaErro => _driver.FindElement(By.XPath("/html/body/div/div/div[2]/div[1]/div[1]/div/form/div[3]/h3"));
+
+        public void verificaElementosNaPagina()
+        {
+            Assert.IsTrue(username.Displayed);
+            Assert.IsTrue(password.Displayed);
+            Assert.IsTrue(loginBtn.Displayed);
+        }
     }
 }

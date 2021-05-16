@@ -9,16 +9,17 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Configuration;
 using desafioFrontTest.Page_Object;
+using OpenQA.Selenium.Remote;
 
 
 
 
 
-namespace desafioFrontTest.Page_Object
+namespace desafioFrontTest
 {
     public class Tests
     {
-        private IWebDriver driver;
+        private RemoteWebDriver driver;
         private string url = "https://www.saucedemo.com/";
 
 
@@ -33,17 +34,15 @@ namespace desafioFrontTest.Page_Object
         {
             driver.Navigate().GoToUrl(url);
 
-            MapeamentoLogin login = new MapeamentoLogin();
-            PageFactory.InitElements(driver, login);
+            MapeamentoLogin login = new MapeamentoLogin(driver);
 
-            Assert.IsTrue(login.username.Displayed);
-            Assert.IsTrue(login.password.Displayed);
-            Assert.IsTrue(login.loginBtn.Displayed);
+            login.verificaElementosNaPagina();
             
             login.username.SendKeys("locked_out_user");
             login.password.SendKeys("secret_sauce");
             login.loginBtn.Click();
-            Assert.Pass();
+            Assert.IsTrue(login.alertaErro.Text.Contains("Epic sadface: Sorry, this user has been locked out."));
+            Console.WriteLine(login.alertaErro.Text);
         }
     }
 }
