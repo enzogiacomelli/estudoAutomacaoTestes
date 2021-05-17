@@ -23,7 +23,7 @@ namespace desafioFrontTest
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver("C:\\Users\\egiac\\Desktop");
+            driver = new ChromeDriver("C:\\Users\\egiac\\source\\repos\\desafioTecnicoAilos\\drivers");
         }
 
         [Test]
