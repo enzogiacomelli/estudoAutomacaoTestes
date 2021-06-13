@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 
 
 namespace desafioFrontTest.Page_Object
@@ -47,6 +46,5 @@ namespace desafioFrontTest.Page_Object
             addToCartTshirRed.Click();
             shoppingCart.Click();
         }
-
     }
 }

@@ -1,23 +1,14 @@
 using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Support.PageObjects;
-using System.Configuration;
 using desafioFrontTest.Page_Object;
-using OpenQA.Selenium.Remote;
-
-
-
 
 
 namespace desafioFrontTest
 {
     public class Tests
     {
-        //private RemoteWebDriver driver;
         private string url = "https://www.saucedemo.com/";
         IWebDriver driver;
 
@@ -25,8 +16,7 @@ namespace desafioFrontTest
         [SetUp]
         public void Setup()
         {
-            //driver = new ChromeDriver("C:\\Users\\egiac\\source\\repos\\desafioTecnicoAilos\\drivers");
-            driver = new FirefoxDriver();
+            driver = Comandos.AbrirNavegador.abrirNavegador();
         }
 
         [Test]
