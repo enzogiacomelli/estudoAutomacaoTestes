@@ -10,7 +10,8 @@ namespace desafioFrontTest.Comandos
         {
             IWebDriver driver;
             var firefoxOptions = new FirefoxOptions();
-            firefoxOptions.PageLoadStrategy = PageLoadStrategy.Eager;
+            firefoxOptions.PageLoadStrategy = PageLoadStrategy.Normal;
+            firefoxOptions.AddArgument("--headless");
             driver = new FirefoxDriver(firefoxOptions);
 
             return driver;
