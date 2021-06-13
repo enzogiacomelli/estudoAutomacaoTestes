@@ -7,9 +7,9 @@ namespace desafioFrontTest.Page_Object
 {
     class MapeamentoCarrinho
     {
-        private RemoteWebDriver _driver;
+        private IWebDriver _driver;
 
-        public MapeamentoCarrinho(RemoteWebDriver driver) => _driver = driver;
+        public MapeamentoCarrinho(IWebDriver driver) => _driver = driver;
 
         public IWebElement checkoutBtn => _driver.FindElement(By.Name("checkout"));
         public IWebElement continueshoppingBtn => _driver.FindElement(By.Name("continue-shopping"));

@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Configuration;
@@ -16,14 +17,16 @@ namespace desafioFrontTest
 {
     public class Tests
     {
-        private RemoteWebDriver driver;
+        //private RemoteWebDriver driver;
         private string url = "https://www.saucedemo.com/";
+        IWebDriver driver;
 
 
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver("C:\\Users\\egiac\\source\\repos\\desafioTecnicoAilos\\drivers");
+            //driver = new ChromeDriver("C:\\Users\\egiac\\source\\repos\\desafioTecnicoAilos\\drivers");
+            driver = new FirefoxDriver();
         }
 
         [Test]
