@@ -1,6 +1,4 @@
-﻿
-
-namespace desafioFrontTest.Testes_de_Login
+﻿namespace desafioFrontTest.Testes_de_Login
 {
     public class Usuarios
     {

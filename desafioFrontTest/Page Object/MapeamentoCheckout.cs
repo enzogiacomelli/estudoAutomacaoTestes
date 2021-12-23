@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
+using desafioFrontTest.Testes_de_Compras;
 
 
 namespace desafioFrontTest.Page_Object
@@ -40,14 +40,14 @@ namespace desafioFrontTest.Page_Object
             Assert.IsTrue(continueCheckout.Displayed);
             Assert.IsTrue(cancelCheckout.Displayed);
         }
-        public void PreencheCheckout(string nome, string sobrenome, string postalcode)
+        public void PreencheCheckout(Compras compra)
         {
-            nomeCheckout.SendKeys(nome);
-            sobrenomeCheckout.SendKeys(sobrenome);
-            postalCodeCheckout.SendKeys(postalcode);
+            nomeCheckout.SendKeys(compra.nome);
+            sobrenomeCheckout.SendKeys(compra.sobrenome);
+            postalCodeCheckout.SendKeys(compra.postalCode);
             continueCheckout.Click();
         }
-        public void VerificaCompra(string valorTotalDaCompra)
+        public void VerificaCompra(Compras compra)
         {
             Assert.IsTrue(finalizar.Displayed);
             Assert.IsTrue(checkoutContainer.Displayed);
@@ -56,7 +56,7 @@ namespace desafioFrontTest.Page_Object
             Assert.IsTrue(taxa.Displayed);
             Assert.IsTrue(total.Displayed);
             Console.WriteLine(total.Text);
-            Assert.IsTrue(total.Text.Contains(valorTotalDaCompra));// valores das compras: 97.17 e 140.34
+            Assert.IsTrue(total.Text.Contains(compra.valorVenda));// valores das compras: 97.17 e 140.34
             finalizar.Click();
             Assert.IsTrue(backHomeBtn.Displayed);
         }
