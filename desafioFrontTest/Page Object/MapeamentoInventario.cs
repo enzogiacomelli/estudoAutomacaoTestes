@@ -7,9 +7,9 @@ namespace desafioFrontTest.Page_Object
 {
     class MapeamentoInventario
     {
-        private RemoteWebDriver _driver;
+        private IWebDriver _driver;
 
-        public MapeamentoInventario(RemoteWebDriver driver) => _driver = driver;
+        public MapeamentoInventario(IWebDriver driver) => _driver = driver;
 
 
         public IWebElement addToCartBackpack => _driver.FindElement(By.Name("add-to-cart-sauce-labs-backpack"));

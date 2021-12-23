@@ -11,9 +11,9 @@ namespace desafioFrontTest.Page_Object
 {
     public class MapeamentoLogin
     {
-        private RemoteWebDriver _driver;
+        private IWebDriver _driver;
 
-        public MapeamentoLogin(RemoteWebDriver driver) => _driver = driver;
+        public MapeamentoLogin(IWebDriver driver) => _driver = driver;
 
 
         public IWebElement username => _driver.FindElement(By.Name("user-name"));

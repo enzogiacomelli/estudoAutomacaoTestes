@@ -8,9 +8,9 @@ namespace desafioFrontTest.Page_Object
 {
     class MapeamentoCheckout
     {
-        private RemoteWebDriver _driver;
+        private IWebDriver _driver;
 
-        public MapeamentoCheckout(RemoteWebDriver driver) => _driver = driver;
+        public MapeamentoCheckout(IWebDriver driver) => _driver = driver;
 
         //checkout parte 1
         public IWebElement nomeCheckout => _driver.FindElement(By.Name("firstName"));
