@@ -1,20 +1,13 @@
 using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Support.UI;
-using System.Configuration;
 using desafioFrontTest.Page_Object;
-using OpenQA.Selenium.Remote;
 
 
 
-
-
-namespace desafioFrontTest
+namespace desafioFrontTest.Testes_de_Login
 {
-    public class Tests
+    public class Testes
     {
         private IWebDriver driver;
         private string url = "https://www.saucedemo.com/";
@@ -34,14 +27,32 @@ namespace desafioFrontTest
             MapeamentoLogin login = new MapeamentoLogin(driver);
 
             login.VerificaElementosNaPagina();
-            login.LogIn("locked_out_user", "secret_sauce");
+            Usuarios user = new Usuarios().usuarioIncorreto();
+            login.LogIn(user);
 
             Assert.IsTrue(login.alertaErro.Text.Contains("Epic sadface: Sorry, this user has been locked out."));
             Console.WriteLine(login.alertaErro.Text);
         }
 
         [Test]
-        public void compraCompleta()
+        public void loginSuccess()
+        {
+            driver.Navigate().GoToUrl(url);
+
+            MapeamentoLogin login = new MapeamentoLogin(driver);
+
+            login.VerificaElementosNaPagina();
+            Usuarios user = new Usuarios().usuarioCorreto();
+            login.LogIn(user);
+
+            Assert.IsTrue(driver.Url == "https://www.saucedemo.com/inventory.html");
+            Assert.IsTrue(driver.Title == "Swag Labs");
+            Console.WriteLine(driver.Url);
+            Console.WriteLine(driver.Title);
+        }
+
+        //[Test]
+        /*public void compraCompleta()
         {
             driver.Navigate().GoToUrl(url);
             MapeamentoLogin login = new MapeamentoLogin(driver);
@@ -84,6 +95,6 @@ namespace desafioFrontTest
             checkout.VerificaElementosNaPagina();
             checkout.PreencheCheckout("Enzo", "Giacomelli", "987654321");
             checkout.VerificaCompra("Total: $140.34");
-        }
+        }*/
     }
 }
