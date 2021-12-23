@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-
-
-
+using desafioFrontTest.Testes_de_Login;
 
 
 
@@ -11,9 +8,9 @@ namespace desafioFrontTest.Page_Object
 {
     public class MapeamentoLogin
     {
-        private RemoteWebDriver _driver;
+        private IWebDriver _driver;
 
-        public MapeamentoLogin(RemoteWebDriver driver) => _driver = driver;
+        public MapeamentoLogin(IWebDriver driver) => _driver = driver;
 
 
         public IWebElement username => _driver.FindElement(By.Name("user-name"));
@@ -28,10 +25,10 @@ namespace desafioFrontTest.Page_Object
             Assert.IsTrue(loginBtn.Displayed);
         }
 
-        public void LogIn(string user, string userPassword)
+        public void LogIn(Usuarios user)
         {
-            username.SendKeys(user);
-            password.SendKeys(userPassword);
+            username.SendKeys(user.nomeDeUsuario);
+            password.SendKeys(user.senha);
             loginBtn.Click();
         }
     }
