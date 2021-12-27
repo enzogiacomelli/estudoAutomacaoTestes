@@ -5,7 +5,7 @@ namespace desafioAPITest
 {
     public class Tests
     {
-
+        string baseUrl = "https://serverest.dev/usuarios/";
         Usuarios user;
 
         [SetUp]
@@ -23,25 +23,32 @@ namespace desafioAPITest
         [Test]
         public void listarUsers()
         {
-            user.getUsuarios();
+            user.getUsuarios(baseUrl);
             Assert.Pass();
         }
         [Test]
         public void deleteUser()
         {
-            user.deleteUsuarios();
+            user.deleteUsuarios(user.getID());
             Assert.Pass();
         }
         [Test]
         public void editarUser()
         {
-            user.putUsuarios();
+            user.putUsuarios(user.getID());
             Assert.Pass();
         }
         [Test]
         public void buscarUsuario()
         {
-            user.getUsuarioEspecifico();
+            user.getUsuarioEspecifico(user.getID());
+            Assert.Pass();
+        }
+
+        [Test]
+        public void teste()
+        {
+            user.getID();
             Assert.Pass();
         }
     }

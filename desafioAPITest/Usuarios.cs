@@ -9,10 +9,18 @@ namespace desafioAPITest
     public class Usuarios
     {
         string baseUrl = "https://serverest.dev/usuarios/";
-        string deleteID = "8nEPy4gyjlqoyKw2";
-        string editID = "wlwqbbmleLQwwHDa";
         string email = InternetFaker.Email();
         
+
+        public string getID()
+        {
+            var restResponse = getUsuarios(baseUrl);
+            var a = restResponse.Content;
+            var c = a.Substring(218).Remove(16);//recorta o id do primeiro usuario retornado
+            Console.WriteLine(c);
+
+            return c;
+        }
 
         public void postUsuario()
         {
@@ -30,38 +38,39 @@ namespace desafioAPITest
 
             IRestResponse restResponse = restClient.Execute(restRequest);
 
-            Console.WriteLine(restResponse.Content);
             Assert.AreEqual(true, restResponse.IsSuccessful);
             Assert.IsTrue(restResponse.Content.Contains("Cadastro realizado com sucesso"));
         }
 
-        public void getUsuarios()
+        public IRestResponse getUsuarios(string url)
         {
-            RestClient restClient = new RestClient(baseUrl);
+            RestClient restClient = new RestClient(url);
             RestRequest restRequest = new RestRequest(Method.GET);
             IRestResponse restResponse = restClient.Execute(restRequest);
 
-            Console.WriteLine(restResponse.Content);
             Assert.AreEqual(true, restResponse.IsSuccessful);
+
+            return restResponse;
         }
 
-        public void getUsuarioEspecifico()
+        public IRestResponse getUsuarioEspecifico(string id)
         {
-            RestClient restClient = new RestClient(baseUrl + editID);
+            RestClient restClient = new RestClient(baseUrl + id);
             RestRequest restRequest = new RestRequest(Method.GET);
             IRestResponse restResponse = restClient.Execute(restRequest);
 
-            Console.WriteLine(restResponse.Content);
             Assert.AreEqual(true, restResponse.IsSuccessful);
-            Assert.IsTrue(restResponse.Content.Contains(editID));
+            Assert.IsTrue(restResponse.Content.Contains(id));
+
+            return restResponse;
         }
 
-        public void putUsuarios()
+        public void putUsuarios(string id)
         {
-            RestClient restClient = new RestClient(baseUrl + editID);
+            RestClient restClient = new RestClient(baseUrl + id);
 
             JObject jsonBody = new JObject();
-            jsonBody.Add("nome", "usuarioAlterado");
+            jsonBody.Add("nome", "usuarioAlterado2");
             jsonBody.Add("email", email);
             jsonBody.Add("password", "testealterado");
             jsonBody.Add("administrador", "true");
@@ -71,21 +80,16 @@ namespace desafioAPITest
             restRequest.AddParameter("application/json", jsonBody, ParameterType.RequestBody);
 
             IRestResponse restResponse = restClient.Execute(restRequest);
-
-            Console.WriteLine(restResponse.Content);
             Assert.AreEqual(true, restResponse.IsSuccessful);
-            Assert.IsTrue(restResponse.Content.Contains("Registro alterado com sucesso"));
         }
 
-        public void deleteUsuarios()
+        public void deleteUsuarios(string id)
         {
-            RestClient restClient = new RestClient(baseUrl + deleteID);
+            RestClient restClient = new RestClient(baseUrl + id);
             RestRequest restRequest = new RestRequest(Method.DELETE);
 
             IRestResponse restResponse = restClient.Execute(restRequest);
-            Console.WriteLine(restResponse.Content);
             Assert.AreEqual(true, restResponse.IsSuccessful);
-            Assert.IsTrue(restResponse.Content.Contains("Registro excluído com sucesso"));
         }
     }
 }
