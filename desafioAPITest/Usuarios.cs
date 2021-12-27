@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using RestSharp;
 using Newtonsoft.Json.Linq;
@@ -13,7 +11,8 @@ namespace desafioAPITest
         string baseUrl = "https://serverest.dev/usuarios/";
         string deleteID = "8nEPy4gyjlqoyKw2";
         string editID = "wlwqbbmleLQwwHDa";
-        string email = Faker.InternetFaker.Email();
+        string email = InternetFaker.Email();
+        
 
         public void postUsuario()
         {
